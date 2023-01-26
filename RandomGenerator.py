@@ -25,8 +25,23 @@ def generate_name(keywords, num_results):
     return names_list
 
 # Get input from the user
-keywords = input("Enter a comma separated keywords for your business name: ")
-num_results = int(input("Enter the number of results you want to generate: "))
+while True:
+    keywords = input("Enter a comma separated keywords for your business name: ")
+    keywords_list = keywords.split(",")
+    if len(keywords_list) > 0:
+        break
+    else:
+        print("Please enter at least one keyword.")
+
+while True:
+    try:
+        num_results = int(input("Enter the number of results you want to generate: "))
+        if num_results > 0:
+            break
+        else:
+            print("Please enter a positive number.")
+    except ValueError:
+        print("Please enter a valid number.")
 
 # Generate and print the business names
 names_list = generate_name(keywords, num_results)
@@ -38,8 +53,23 @@ for name in names_list:
 while True:
     regenerate = input("Do you want to generate new names? (y/n): ")
     if regenerate.lower() == "y":
-        keywords = input("Enter a comma separated keywords for your business name: ")
-        num_results = int(input("Enter the number of results you want to generate: "))
+        while True:
+            keywords = input("Enter a comma separated keywords for your business name: ")
+            keywords_list = keywords.split(",")
+            if len(keywords_list) > 0:
+                break
+            else:
+                print("Please enter at least one keyword.")
+
+        while True:
+            try:
+                num_results = int(input("Enter the number of results you want to generate: "))
+                if num_results > 0:
+                    break
+                else:
+                    print("Please enter a positive number.")
+            except ValueError:
+                print("Please enter a valid number.")
         names_list = generate_name(keywords, num_results)
         print("Generated Business names:")
         for name in names_list:
