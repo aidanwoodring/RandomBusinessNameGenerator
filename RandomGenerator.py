@@ -6,10 +6,13 @@
 import random
 import requests
 
-def generate_name(keyword):
+def generate_name(keywords):
     # Use the keyword to search for related words on the internet
-    search_url = "https://api.datamuse.com/words?rel_jjb=" + keyword
-    search_results = requests.get(search_url).json()
+    keywords_list = keywords.split(",")
+    search_results = []
+    for keyword in keywords_list:
+        search_url = "https://api.datamuse.com/words?rel_jjb=" + keyword
+        search_results += requests.get(search_url).json()
     
     # Choose a random word from the search results
     adj = random.choice(search_results)['word']
@@ -19,7 +22,7 @@ def generate_name(keyword):
     return name
 
 # Get input from the user
-keyword = input("Enter a keyword for your business name: ")
+keywords = input("Enter a comma separated keywords for your business name: ")
 
 # Generate and print the business name
-print(generate_name(keyword))   
+print(generate_name(keywords))
